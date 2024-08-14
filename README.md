@@ -34,7 +34,7 @@ To use the Scribble GYB configuration, you can either add it to your project as 
     git submodule update
     ```
 
-#### Option 2: Manually Copy Files
+#### Option 2: Manually Copy Files `(recommended)`
 
 1. Clone the scribble-gyb config repository:
 
