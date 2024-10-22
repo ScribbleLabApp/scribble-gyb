@@ -1,20 +1,33 @@
 # Scribble GYB (Generate Your Boilerplate)
 
+The Scribble GYB configuration simplifies boilerplate code generation for ScribbleLabApp projects. By utilizing Python scripting capabilities, GYB provides a flexible approach to reducing repetitive code and improving consistency in Swift, Objective-C, and Objective-C++ projects.
+
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Installation](#installation)
+   
+   2.1 [Add scribble-gyb as git submodule](#option-1-add-scribble-gyb-as-git-submodule)
+   
+   2.2 [Manually Copy Files](#option-2-manually-copy-files-recommended)
+
+3. [Template Syntax](#template-syntax)
+   
+   3.1 [Code Blocks](#python-code-blocks)
+   
+   3.2 [Variables & Placeholders](#variables-and-placeholders)
+   
+   3.3 [Conditional Logic](#conditional-logic)
+
 ## Overview
 
-This repository provides a GYB (Generate Your Boilerplate) configuration tailored for ScribbleLabApp projects. GYB is a tool for generating Swift code using templates, which helps in maintaining a consistent and DRY (Don't Repeat Yourself) codebase. This setup automates boilerplate code generation, reducing manual coding effort and minimizing errors.
+GYB (Generate Your Boilerplate) is a tool used to generate source code by mixing Python code with template files. It allows developers to avoid redundancy by dynamically generating patterns across different files or languages. Scribble GYB offers a powerful way to ensure clean, consistent code while minimizing manual coding effort.
 
-## Purpose 
+## Installation
 
-The Scribble GYB configuration streamlines the generation of boilerplate code for Swift projects. By using this configuration, you can ensure repetitive code patterns are handled efficiently and consistently across your projects.
+Scribble GYB can be integrated into your project either as a Git submodule or by manually copying files into the project directory.
 
-## Getting Started
-
-### Installation
-
-To use the Scribble GYB configuration, you can either add it to your project as a submodule or manually copy the necessary files.
-
-#### Option 1: Add scribble-gyb as git submodule
+### Option 1: Add scribble-gyb as git submodule
 
 1. Navigate to your project you want to use scribble-gyb in:
 
@@ -42,31 +55,29 @@ To use the Scribble GYB configuration, you can either add it to your project as 
     git clone https://github.com/ScribbleLabApp/scribble-gyb.git
     ```
 
-2. Create a utils directory in your project:   
+2. Create a `utils` directory in your project:   
    ```shell
-   mkdir -p utils
+   mkdir -p /path/to/your-project/utils
    ```
 
-3. Navigate to the cloned repository and copy the required files:
+3. Copy the gyb runtime preprocessor to your repo
 
    ```shell
-   cd scribble-gyb
-   cp generate-sources.sh gyb.py gyb_utils.py gyb location-to-your-project/utils/
+   cp -R scribble-gyb/* /path/to/your-project/utils/
    ```
 
 4. Navigate to your project directory and ensure the files are in place under the utils directory.
 
-## Usage
+## Template Syntax
 
-The GYB (Generate Your Boilerplate) tool is configured in this repository to allow you to integrate Python scripting with Swift code generation. This setup provides a flexible and powerful way to generate boilerplate code dynamically.
+GYB templates are composed of two primary elements:
 
-### Scribble-GYB Syntax
-
-In GYB templates, you can mix Python code with Swift code. The syntax allows you to embed Python code within Swift files using special markers and placeholders.
+   - **Python code blocks** for logic and control flow.
+   - **Code placeholders** that insert Python values into generated code.
 
 #### Python Code Blocks
 
-To include Python code in your Swift files, use the following markers:
+Python code is either written inside `%{ ... }%` or `${...}$` blocks. These blocks are executed at template processing time, allowing for dynamic code generation based on runtime values or logic.
 
 ```python
 %{
@@ -77,58 +88,110 @@ To include Python code in your Swift files, use the following markers:
 
 #### Variables and Placeholders
 
-You can define Python variables and use them as placeholders in your Swift code. Use the `${var}` syntax to insert Python variable values into your Swift code.
+Python variables defined inside a GYB template can be inserted into Swift, Objective-C, or Objective-C++ code using `${var}` syntax.
 
 ```swift
 %{
-my_variable = "Hello, GYB!"
+py_greeting = "Hello, GYB!"
 }%
 
 public struct Greeting {
-    public let message: String = "${my_variable}"
+    public let message: String = "${py_greeting}"
 }
 
-print(Greeting.message) // ~> Hello, GYB!
+print(Greeting.message) // [OUTPUT] ~> Hello, GYB!
+```
+
+```objc
+%{
+   message = "Hello, GYB ObjC!"
+}%
+
+NSString *greeting = @"${message}"; // [OUTPUT] ~> Hello, GYB ObjC!
 ```
 
 #### Conditional Logic
 
-You can use Python's if statements within your templates to include or exclude code based on conditions:
+GYB supports Python control flow constructs such as if statements, enabling conditional code generation.
 
 ```swift
 %{
-    x = 10
+   is_logged_in = True
 }%
 
-% if x > 5:
-public struct LargeNumber {
-    public let value: Int = ${x}
-}
-
+% if is_logged_in:
+   print("Welcome back!")
 % else:
-public struct SmallNumber {
-    public let value: Int = 0
-}
+   print("Please log in.")
 % end
 ```
 
-In this example, if x is greater than 5, the LargeNumber struct is included in the generated Swift code. Otherwise, SmallNumber is included.
+```objc
+%{
+   use_large_buffer = True
+}%
+
+% if use_large_buffer:
+   #define BUFFER_SIZE 1024
+% else:
+   #define BUFFER_SIZE 256
+% end
+
+char buffer[BUFFER_SIZE];
+```
 
 ### Loops
 
-Use Python's for loops to iterate over a range or collection and generate repetitive code:
+GYB templates can use Python's `for` loops to generate repeated code blocks. 
 
 ```swift
 %{
-    items = ['a', 'b', 'c']
+   fields = ['name', 'age', 'email']
 }%
 
-public struct Letters {
-    % for item in items:
-        public let ${item}: String = "${item}"
-    % end
+struct User {
+   % for field in fields:
+      var ${field}: String
+   % end
 }
 ```
+
+##### Autogenerated Source
+
+```swift
+struct User {
+   var name: String
+   var age: String
+   var email: String
+}
+```
+
+```objc
+%{
+   methods = ['getName', 'getAge', 'getEmail']
+}%
+
+@interface User : NSObject
+% for method in methods:
+- (NSString *)${method};
+% end
+@end
+```
+
+##### Autogenerated Source
+
+```objc
+@interface User : NSObject
+
+- (NSString *)getName;
+- (NSString *)getAge;
+- (NSString *)getEmail;
+
+@end
+```
+
+## Using gyb_utils.py for Shared Utilities
+
 
 ### Running Scribble-GYB
 
