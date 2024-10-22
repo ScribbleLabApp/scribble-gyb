@@ -19,6 +19,14 @@ The Scribble GYB configuration simplifies boilerplate code generation for Scribb
    
    3.3 [Conditional Logic](#conditional-logic)
 
+   3.4 [Loops](#loops)
+
+4. [Using gyb_utils.py for Shared Utilities](#using-gyb-utils-py-for-shared-utilities)
+
+   4.1 [Declaring global variables](#declaring-global-utilities-in-gyb-utils-py)
+
+   4.2 [Importing and Using Utilities](#importing-and-using-utilities-in-gyb-templates)
+
 ## Overview
 
 GYB (Generate Your Boilerplate) is a tool used to generate source code by mixing Python code with template files. It allows developers to avoid redundancy by dynamically generating patterns across different files or languages. Scribble GYB offers a powerful way to ensure clean, consistent code while minimizing manual coding effort.
@@ -191,6 +199,39 @@ struct User {
 ```
 
 ## Using gyb_utils.py for Shared Utilities
+
+The `gyb_utils.py` file in the Scribble GYB configuration allows you to declare global variables, helper functions, or imports that can be reused across different GYB templates. This is especially useful when you have common logic or variables that need to be shared.
+
+### Declaring Global Utilities in `gyb_utils.py`
+
+You can modify the `gyb_utils.py` file to declare any utility functions, global variables, or imports. For example, you can declare shared constants or utility functions like this:
+
+```py
+# gyb_utils.py
+PI = 3.14159
+
+def square(x):
+    return x * x
+```
+
+### Importing and Using Utilities in GYB Templates
+
+Once you have your utilities declared, you can import them into any GYB template by using a simple Python import statement at the top of your template:
+
+```py
+%{
+    from gyb_utils import *
+}%
+
+print("The value of PI is ${PI}")
+print("The square of 4 is ${square(4)}")
+```
+
+This allows you to maintain clean, reusable code in your GYB templates, avoiding redundancy and making your templates more maintainable.
+
+## Using GYB with Objective-C and Objective-C++
+
+
 
 
 ### Running Scribble-GYB
