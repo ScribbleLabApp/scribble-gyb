@@ -22,12 +22,18 @@ The Scribble GYB configuration simplifies boilerplate code generation for Scribb
    3.4 [Loops](#loops)
 
 4. [Supported Types](#supported-types)
+   
+   4.1 [Supported Swift Types](#supported-swift-types)
+
+   4.2 [Supported ObjC Types](#supported-objective-c-types)
+
+   4.3 [Supported ObjC++ Types](#supported-objective-c-types-1)
 
 5. [Using gyb_utils.py for Shared Utilities](#using-gyb-utils-py-for-shared-utilities)
 
-   4.1 [Declaring global variables](#declaring-global-utilities-in-gyb-utils-py)
+   5.1 [Declaring global variables](#declaring-global-utilities-in-gyb-utils-py)
 
-   4.2 [Importing and Using Utilities](#importing-and-using-utilities-in-gyb-templates)
+   5.2 [Importing and Using Utilities](#importing-and-using-utilities-in-gyb-templates)
 
 6. [Using GYB with ObjC and ObjC++](#using-gyb-with-objective-c-and-objective-c++)
 
@@ -213,6 +219,47 @@ struct User {
 ```
 
 ## Supported Types
+
+GYB supports a variety of data types, allowing you to easily generate code with the required type annotations and variable declarations. The following types are supported:
+
+### Supported Swift Types
+
+| **Type**       | **Description**                                   | **Value**                                   | **Example**                |
+|----------------|---------------------------------------------------|---------------------------------------------|----------------------------|
+| `String`       | Represents a sequence of characters.              | N/A                                         | `"Hello, World!"`           |
+| `Int`          | Represents a signed integer.                      | `-9223372036854775808` to `9223372036854775807` | `42`                       |
+| `Int8`         | Represents an 8-bit signed integer.               | `-128` to `127`                             | `Int8(127)`                |
+| `Int16`        | Represents a 16-bit signed integer.               | `-32768` to `32767`                         | `Int16(32767)`             |
+| `Int32`        | Represents a 32-bit signed integer.               | `-2147483648` to `2147483647`               | `Int32(2147483647)`        |
+| `Int64`        | Represents a 64-bit signed integer.               | `-9223372036854775808` to `9223372036854775807` | `Int64(9223372036854775807)` |
+| `UInt8`        | Represents an 8-bit unsigned integer.             | `0` to `255`                                | `UInt8(255)`               |
+| `UInt16`       | Represents a 16-bit unsigned integer.             | `0` to `65535`                              | `UInt16(65535)`            |
+| `UInt32`       | Represents a 32-bit unsigned integer.             | `0` to `4294967295`                         | `UInt32(4294967295)`       |
+| `UInt64`       | Represents a 64-bit unsigned integer.             | `0` to `18446744073709551615`               | `UInt64(18446744073709551615)` |
+| `Bool`         | Represents a Boolean value (`true` or `false`).   | `true` or `false`                           | `true`                     |
+| `Double`       | Represents a double-precision floating-point number. | ~±1.7e308                                  | `3.14159`                  |
+| `Float`        | Represents a single-precision floating-point number. | ~±3.4e38                                   | `2.71828f`                 |
+
+### Supported Objective-C Types
+
+| **Type**       | **Description**                                   | **Value**                                   | **Example**                |
+|----------------|---------------------------------------------------|---------------------------------------------|----------------------------|
+| `NSString`     | Represents a string object.                       | N/A                                         | `@"Hello, World!"`          |
+| `NSInteger`    | Represents a signed integer.                      | `-9223372036854775808` to `9223372036854775807` | `NSInteger value = 42;`    |
+| `NSUInteger`   | Represents an unsigned integer.                   | `0` to `18446744073709551615`               | `NSUInteger count = 10;`   |
+| `BOOL`         | Represents a Boolean value (`YES` or `NO`).        | `YES` or `NO`                               | `BOOL isActive = YES;`     |
+| `CGFloat`      | Represents a floating-point number, typically used for UI measurements. | Varies depending on the platform            | `CGFloat width = 100.0;`   |
+
+### Supported Objective-C++ Types
+
+| **Type**       | **Description**                                   | **Value**                                   | **Example**                |
+|----------------|---------------------------------------------------|---------------------------------------------|----------------------------|
+| `std::string`  | Represents a string object from the C++ Standard Library. | N/A                                     | `std::string name = "John";`|
+| `int`          | Represents a signed integer.                      | `-2147483648` to `2147483647`               | `int age = 30;`            |
+| `unsigned int` | Represents an unsigned integer.                   | `0` to `4294967295`                         | `unsigned int count = 5;`  |
+| `bool`         | Represents a Boolean value (`true` or `false`).   | `true` or `false`                           | `bool isValid = true;`     |
+| `float`        | Represents a single-precision floating-point number. | ~±3.4e38                                   | `float pi = 3.14f;`        |
+| `double`       | Represents a double-precision floating-point number. | ~±1.7e308                                  | `double e = 2.71828;`      |
 
 ## Using gyb_utils.py for Shared Utilities
 
