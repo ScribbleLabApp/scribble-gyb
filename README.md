@@ -41,7 +41,35 @@ The Scribble GYB configuration simplifies boilerplate code generation for Scribb
 
    7.1 [Steps to generate Source files](#steps-to-generate-code)
 
-8. [Customization `(in planning)`](#customization)
+8. [Customization `(in planning)`](#customization-in-planning)
+
+   8.1 [Purpose of the .gyb_config File](#purpose-of-the-gyb_config-file)
+
+   8.2 [Proposed Structure of the .gyb_config File](#proposed-structure-of-the-gyb_config-file)
+
+   8.3 [Configuration Elements](#configuration-elements)
+
+      8.3.1 [Template Directives (templateDirectives)](#template-directives-templatedirectives)
+
+      8.3.1.1 [Directive (templateDirectives/directive)](#directive-templatedirectivesdirective)
+
+      8.3.2 [Output Configuration (outputConfiguration)](#output-configuration-outputconfiguration)
+
+      8.3.2.1 [Output Path (outputConfiguration/outputPath)](#output-path-outputconfigurationoutputpath)
+
+      8.3.2.2 [Project Root (projectRoot)](#project-root-projectroot)
+
+      8.3.2.3 [File Naming Convention (outputConfiguration/fileNamingConvention)](#file-naming-convention-outputconfigurationfilenamingconvention)
+
+      8.3.2.4 [Build Flags (outputConfiguration/buildFlags)](#build-flags-outputconfigurationbuildflags)
+
+      8.3.3 [Import Management (importManagement)](#import-management-importmanagement)
+
+      8.3.3.1 [Module (importManagement/Module)](#module-importmanagementmodule)
+
+      8.3.3.2 [Advantages of using auto import Models](#advantages-of-using-auto-import-models)
+
+   8.4 [Using the .gyb_config File](#using-the-gyb_config-file)
 
 9. [Best Practices](#best-practices)
 
