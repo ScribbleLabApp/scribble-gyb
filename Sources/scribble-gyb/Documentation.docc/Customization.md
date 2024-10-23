@@ -7,7 +7,7 @@ Customization of Scribble GYB's Processing Configuration
 The customization of the Scribble GYB's processing configuration aims to enhance the flexibility and functionality of the GYB template processing. While this feature is currently in planning, we envision using a `.gyb_config` file formatted as XML to allow developers to tailor the behavior of GYB templates to meet their specific needs. This documentation outlines the intended structure, potential configurations, and usage of the `.gyb_config` file for customizing Scribble GYB.
 
 > IMPORTANT:
-> The customization of Scribble GYB's processing configuration is currently not available as it is in planning. This article should rather be seen as a descriptive propsal. 
+> The customization of Scribble GYB's processing configuration is currently not available as it is in planning. This article should rather be seen as a descriptive proposal. 
 >
 > Customization will be available in v1.0 of Scribble GYB. For more information visit our [GitHub repository](https://github.com/ScribbleLabApp/scribble-gyb).
 
