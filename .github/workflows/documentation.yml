@@ -39,9 +39,13 @@ jobs:
             -destination 'generic/platform=iOS' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO;
           $(xcrun --find docc) process-archive \
             transform-for-static-hosting /tmp/docbuild/Build/Products/Debug-iphoneos/scribble-gyb.doccarchive \
-            --hosting-base-path scribble_gyb \
+            --hosting-base-path scribble-gyb \
             --output-path docs;
           echo "<script>window.location.href += \"/documentation/scribble_gyb\"</script>" > docs/index.html;
+
+      - name: List docs contents (DDEBUG ONLY)
+        run: ls -lah docs
+        
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
