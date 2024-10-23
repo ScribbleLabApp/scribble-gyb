@@ -20,11 +20,18 @@ Automates boilerplate code generation using templates with embedded Python for S
 ### Essentials
 
 - <doc:Installation>
-- <doc:Customization>
 - <doc:Processing>
-- <doc:Changelog>
 
 ### Syntax
 
 - <doc:Syntax>
 - <doc:Supported-Types>
+
+### Customizing Scribble GYB
+
+- <doc:Customization>
+- <doc:SharedUtilities>
+
+### Misc
+
+- <doc:Changelog>

@@ -164,3 +164,4 @@ Scribble GYB's loops can be useful when conforming a type to multiple protocols.
 ## See Also
 
 - <doc:Supported-Types>
+- <doc:SharedUtilities>

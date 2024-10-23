@@ -5,6 +5,7 @@ A concise record of notable changes and updates to Scribble-GYB.
 @Metadata { 
     @PageImage( purpose: icon, source: "starbubble", alt: "A background icon")
     @PageColor(yellow)
+    @TitleHeading("Updates")
 }
 
 ## v0.1.0 (Stable Release)
